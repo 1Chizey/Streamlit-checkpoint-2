@@ -87,18 +87,24 @@ job_type_encoder = {
 st.title("Bank Customer Churn Prediction")
 st.write("This app predicts whether a customer has a bank account or not.")
 
+#create two columns 
+col1, col2 = st.columns(2)
+with col1:
+    country = country_encoder[st.selectbox("Country", df['country'].unique())]
+    location_type = location_type_encoder[st.selectbox("Location Type", df['location_type'].unique())]
+    cellphone_access = cellphone_access_encoder[st.selectbox("Cellphone Access", df['cellphone_access'].unique())]
+    household_size = st.number_input("Household Size", min_value=df["household_size"].min(), max_value=df["household_size"].max())
+    age_of_respondent = st.number_input("Age of Respondent", min_value=df["age_of_respondent"].min(), max_value=df["age_of_respondent"].max())
+with col2:
+    gender_of_respondent = gender_of_respondent_encoder[st.selectbox("Gender of Respondent", df["gender_of_respondent"].unique())]
+    relationship_with_head = relationship_with_head_encoder[st.selectbox("Relationship with Head", df["relationship_with_head"].unique())]
+    marital_status = marital_status_encoder[st.selectbox("Marital Status", df["marital_status"].unique())]
+    education_level = education_level_encoder[st.selectbox("Education Level", df["education_level"].unique())]
+    job_type = job_type_encoder[st.selectbox("Job Type", df["job_type"].unique())]
+
+
 #Display input features
-country = country_encoder[st.selectbox("Country", df['country'].unique())]
-st.write("Country:")
-location_type = location_type_encoder[st.selectbox("Location Type", df['location_type'].unique())]
-cellphone_access = cellphone_access_encoder[st.selectbox("Cellphone Access", df['cellphone_access'].unique())]
-household_size = st.number_input("Household Size", min_value=df["household_size"].min(), max_value=df["household_size"].max())
-age_of_respondent = st.number_input("Age of Respondent", min_value=df["age_of_respondent"].min(), max_value=df["age_of_respondent"].max())
-gender_of_respondent = gender_of_respondent_encoder[st.selectbox("Gender of Respondent", df["gender_of_respondent"].unique())]
-relationship_with_head = relationship_with_head_encoder[st.selectbox("Relationship with Head", df["relationship_with_head"].unique())]
-marital_status = marital_status_encoder[st.selectbox("Marital Status", df["marital_status"].unique())]
-education_level = education_level_encoder[st.selectbox("Education Level", df["education_level"].unique())]
-job_type = job_type_encoder[st.selectbox("Job Type", df["job_type"].unique())]
+
 
 #Create a DataFrame for the input data
 input_data = pd.DataFrame({
